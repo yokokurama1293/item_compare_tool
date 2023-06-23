@@ -55,10 +55,11 @@ def compare_items(character, new_item, weights):
     breakdown += "Breakdown:\n"
 
     # Include DPS value in the breakdown
+    dps_index = matching_attrs.index("DPS value")
     breakdown += f"DPS value:\n"
-    breakdown += f"  Current weapon: {current_dps}\n"
-    breakdown += f"  New weapon: {new_dps}\n"
-    breakdown += f"  Weight: {weight}\n"
+    breakdown += f"  Current weapon: {current_values[dps_index]}\n"
+    breakdown += f"  New weapon: {new_values[dps_index]}\n"
+    breakdown += f"  Weight: {weights_values[dps_index]}\n"
 
     for i in range(len(matching_attrs)):
         attr = matching_attrs[i]
