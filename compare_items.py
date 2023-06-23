@@ -34,7 +34,12 @@ def compare_items(character, new_item, weights):
     new_values = []
     weights_values = []
 
-    for attr, weight in weights.items():
+# Create a set of all attributes from both weapons
+    all_attributes = set(current_weapon_attributes.keys()).union(new_weapon_attributes.keys())
+
+    for attr in all_attributes:
+        weight = weights.get(attr, 0)  # Use a default weight of 0 for attributes not in the weights dictionary
+
         if attr == "DPS value":
             current_dps = current_weapon_attributes.get(attr, 0)
             new_dps = new_weapon_attributes.get(attr, 0)
@@ -44,22 +49,27 @@ def compare_items(character, new_item, weights):
             current_values.append(current_dps)
             new_values.append(new_dps)
             weights_values.append(weight)
-            continue
 
-        # if current_value != 0 or new_value != 0:
-        #     matching_attrs.append(attr)
-        #     current_values.append(current_value)
-        #     new_values.append(new_value)
-        #     weights_values.append(weight)
+        current_value = current_weapon_attributes.get(attr, 0)
+        new_value = new_weapon_attributes.get(attr, 0)
+
+        current_weapon_score += current_value * weight
+        new_weapon_score += new_value * weight
+
+        if current_value != 0 or new_value != 0:
+            matching_attrs.append(attr)
+            current_values.append(current_value)
+            new_values.append(new_value)
+            weights_values.append(weight)
 
     breakdown += "Breakdown:\n"
 
     # Include DPS value in the breakdown
-    dps_index = matching_attrs.index("DPS value")
-    breakdown += f"DPS value:\n"
-    breakdown += f"  Current weapon: {current_values[dps_index]}\n"
-    breakdown += f"  New weapon: {new_values[dps_index]}\n"
-    breakdown += f"  Weight: {weights_values[dps_index]}\n"
+    # dps_index = matching_attrs.index("DPS value")
+    # breakdown += f"DPS value:\n"
+    # breakdown += f"  Current weapon: {current_values[dps_index]}\n"
+    # breakdown += f"  New weapon: {new_values[dps_index]}\n"
+    # breakdown += f"  Weight: {weights_values[dps_index]}\n"
 
     for i in range(len(matching_attrs)):
         attr = matching_attrs[i]
