@@ -38,19 +38,19 @@ def compare_items(character, new_item, weights):
         if attr == "DPS value":
             current_dps = current_weapon_attributes.get(attr, 0)
             new_dps = new_weapon_attributes.get(attr, 0)
+            current_weapon_score += current_dps * weight
+            new_weapon_score += new_dps * weight
+            matching_attrs.append(attr)
+            current_values.append(current_dps)
+            new_values.append(new_dps)
+            weights_values.append(weight)
             continue
 
-        current_value = current_weapon_attributes.get(attr, 0)
-        new_value = new_weapon_attributes.get(attr, 0)
-
-        current_weapon_score += current_value * weight
-        new_weapon_score += new_value * weight
-
-        if current_value != 0 or new_value != 0:
-            matching_attrs.append(attr)
-            current_values.append(current_value)
-            new_values.append(new_value)
-            weights_values.append(weight)
+        # if current_value != 0 or new_value != 0:
+        #     matching_attrs.append(attr)
+        #     current_values.append(current_value)
+        #     new_values.append(new_value)
+        #     weights_values.append(weight)
 
     breakdown += "Breakdown:\n"
 
@@ -58,7 +58,7 @@ def compare_items(character, new_item, weights):
     breakdown += f"DPS value:\n"
     breakdown += f"  Current weapon: {current_dps}\n"
     breakdown += f"  New weapon: {new_dps}\n"
-    breakdown += "  Weight: N/A\n\n"
+    breakdown += f"  Weight: {weight}\n"
 
     for i in range(len(matching_attrs)):
         attr = matching_attrs[i]
