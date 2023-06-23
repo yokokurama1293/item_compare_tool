@@ -1,8 +1,22 @@
 import json
+import tkinter
+import customtkinter
 from character import Character
 from item import Item
 from user_input import get_item_from_user
 from compare_items import compare_items
+
+# System Settings
+customtkinter.set_appearance_mode("System")
+customtkinter.set_default_color_theme("red")
+
+# App Frame
+app = customtkinter.CTk()
+app.geometry("720x480")
+app.title("Diablo Item Comparison")
+
+# Run app
+app.mainloop()
 
 # Create a character
 char = Character('MyCharacter', 'druid')
