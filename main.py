@@ -1,5 +1,5 @@
 import json
-import tkinter
+import tkinter as tk
 import customtkinter
 from character import Character
 from item import Item
@@ -8,15 +8,27 @@ from compare_items import compare_items
 
 # System Settings
 customtkinter.set_appearance_mode("System")
-customtkinter.set_default_color_theme("red")
 
 # App Frame
 app = customtkinter.CTk()
 app.geometry("720x480")
-app.title("Diablo Item Comparison")
 
-# Run app
-app.mainloop()
+def main():
+    # Create a new Tk root window
+    root = tk.Tk()
+
+    # Set the title of the window
+    root.title("Item Compare Tool")
+
+    # Create a label and add it to the window
+    label = tk.Label(root, text="Welcome to the Item Compare Tool!")
+    label.pack()
+
+    # Start the Tk event loop
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()
 
 # Create a character
 char = Character('MyCharacter', 'druid')
